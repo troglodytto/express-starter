@@ -1,0 +1,20 @@
+app:
+  port: 3000
+
+database:
+  host: localhost
+  port: 5432
+  username: <username>
+  password: <password>
+  database: <database>
+
+tokens:
+  accessSecret: '<access-secret>'
+  refreshSecret: '<refresh-secret>'
+
+test:
+  validAccessToken: ''
+  validRefreshToken: ''
+  invalidAccessToken: ''
+  invalidRefreshToken: ''
+  userId: ''
