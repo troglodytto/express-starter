@@ -1,10 +1,12 @@
 import config from 'config';
 import {
+  Connection,
   ConnectionOptions,
   createConnection,
   getConnection,
   LoggerOptions,
 } from 'typeorm';
+import logger from './utils/log';
 import entities from './models';
 
 export default async function connectDatabase(logging: LoggerOptions = true) {
@@ -21,9 +23,17 @@ export default async function connectDatabase(logging: LoggerOptions = true) {
     name: 'default',
   };
 
+  let connection: Connection;
   try {
-    return getConnection(connectionOptions.name);
+    connection = await getConnection(connectionOptions.name);
   } catch {
-    return createConnection(connectionOptions);
+    connection = await createConnection(connectionOptions);
   }
+
+  if (connection?.isConnected) {
+    logger.info(
+      `Connected to database '${connection.options.database}' on '${connectionOptions.host}:${connectionOptions.port}'`
+    );
+  }
+  return connection;
 }
