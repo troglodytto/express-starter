@@ -22,25 +22,14 @@
     }
   },
   "rules": {
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        "ts": "never"
-      }
-    ],
+    "import/extensions": ["error", "ignorePackages", { "ts": "never" }],
     "no-console": "off",
-    "no-unused-vars": [
-      "error",
-      {
-        "argsIgnorePattern": "^_"
-      }
-    ],
+    "no-unused-vars": "off",
+    "no-shadow": "off",
     "@typescript-eslint/no-unused-vars": [
       "error",
-      {
-        "argsIgnorePattern": "^_"
-      }
-    ]
+      { "argsIgnorePattern": "^_" }
+    ],
+    "@typescript-eslint/no-shadow": ["error"]
   }
 }
