@@ -23,8 +23,8 @@
   },
   "rules": {
     "import/extensions": ["error", "ignorePackages", { "ts": "never" }],
-    "no-console": "off",
     "no-unused-vars": "off",
+    "no-console": "error",
     "no-shadow": "off",
     "@typescript-eslint/no-unused-vars": [
       "error",

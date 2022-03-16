@@ -1,6 +1,5 @@
 import config from 'config';
 import {
-  Connection,
   ConnectionOptions,
   createConnection,
   getConnection,
@@ -8,6 +7,14 @@ import {
 } from 'typeorm';
 import logger from './utils/log';
 import entities from './models';
+
+async function getOrCreateConnection(options: ConnectionOptions) {
+  try {
+    return getConnection(options.name);
+  } catch {
+    return createConnection(options);
+  }
+}
 
 export default async function connectDatabase(logging: LoggerOptions = true) {
   const connectionOptions: ConnectionOptions = {
@@ -23,17 +30,13 @@ export default async function connectDatabase(logging: LoggerOptions = true) {
     name: 'default',
   };
 
-  let connection: Connection;
-  try {
-    connection = await getConnection(connectionOptions.name);
-  } catch {
-    connection = await createConnection(connectionOptions);
-  }
+  const connection = await getOrCreateConnection(connectionOptions);
 
-  if (connection?.isConnected) {
+  if (connection.isConnected) {
     logger.info(
       `Connected to database '${connection.options.database}' on '${connectionOptions.host}:${connectionOptions.port}'`
     );
   }
+
   return connection;
 }
