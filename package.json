@@ -12,6 +12,7 @@
     "prebuild": "rimraf app .nyc_output",
     "test": "NODE_ENV=test mocha app/test/**/**.spec.js",
     "test:dev": "concurrently 'tsc --watch' 'yarn test --watch'",
+    "coverage": "nyc yarn test",
     "format": "prettier src/* --write",
     "lint": "eslint src/**/**.ts"
   },
@@ -19,6 +20,7 @@
     "axios": "^0.26.0",
     "body-parser": "^1.19.2",
     "chai": "^4.3.6",
+    "chai-as-promised": "^7.1.1",
     "chai-http": "^4.3.0",
     "chalk": "^4.1.2",
     "config": "^3.3.7",
@@ -42,6 +44,7 @@
   },
   "devDependencies": {
     "@types/chai": "^4.3.0",
+    "@types/chai-as-promised": "^7.1.5",
     "@types/chalk": "^2.2.0",
     "@types/config": "^0.0.41",
     "@types/cors": "^2.8.12",
