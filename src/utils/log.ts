@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { red as ERROR, green as DEBUG, blue as INFO } from 'chalk';
+import chalk from 'chalk';
 import { Console } from 'console';
+
+const { red: ERROR, green: DEBUG, blue: INFO } = chalk;
 
 class Logger extends Console {
   private options = { ERROR, DEBUG, INFO };
@@ -26,12 +28,12 @@ class Logger extends Console {
   ): void {
     const serialized = Logger.serialize(input);
     const message = `[ ${type} ] ${serialized}`;
-    let chalk = this.options[type];
+    let writer = this.options[type];
 
-    if (disableColor) chalk = chalk.reset;
-    if (enableBold) chalk = chalk.bold;
+    if (disableColor) writer = writer.reset;
+    if (enableBold) writer = writer.bold;
 
-    super.log(chalk(message), ...optionalParams);
+    super.log(writer(message), ...optionalParams);
   }
 
   error(input?: any, ...optionalParams: any[]): void {
